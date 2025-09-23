@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.balionis.juxt.sandbox.client.SandboxClientTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-09-23T18:51:26.704Z" hostname="bamac01" time="0.621">
+  <properties/>
+  <testcase name="testSuccessForType1()" classname="com.balionis.juxt.sandbox.client.SandboxClientTest" time="0.621"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
