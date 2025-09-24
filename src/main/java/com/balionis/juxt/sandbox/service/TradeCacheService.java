@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class TradeCacheService {
+public final class TradeCacheService {
     private final Map<UUID, CreateTradeEvent> tradesCache = new ConcurrentHashMap<>();
 
     public TradeCacheService(TradeCacheSupplier supplier) {

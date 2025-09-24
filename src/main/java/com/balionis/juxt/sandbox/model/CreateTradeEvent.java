@@ -3,7 +3,7 @@ package com.balionis.juxt.sandbox.model;
 import java.util.Objects;
 import java.util.UUID;
 
-public class CreateTradeEvent extends TradeEvent {
+public final class CreateTradeEvent extends TradeEvent {
     private final Currency boughtCurrency;
     private final Currency soldCurrency;
     public CreateTradeEvent(UUID id, Currency boughtCurrency, Currency soldCurrency) {

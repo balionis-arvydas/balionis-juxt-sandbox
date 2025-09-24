@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Map;
 
-public class TradeAggregationService {
+public final class TradeAggregationService {
 
     private final TradeCacheService tradeCacheService;
     private final Map<CurrencyType, BigDecimal> positions;
@@ -40,11 +40,6 @@ public class TradeAggregationService {
         processCurrencyAmount(event.getBoughtCurrency(), 1);
     }
 
-    private void processCurrencyAmount(Currency currency, int sign) {
-        positions.computeIfPresent(currency.type(),
-                (k,v) -> v.add(currency.amount().multiply(BigDecimal.valueOf(sign))));
-    }
-
     private void processCancelTradeEvent(CancelTradeEvent event) {
         tradeCacheService.findTrade(event.getId())
                 .map(CreateTradeEvent.class::cast)
@@ -52,5 +47,10 @@ public class TradeAggregationService {
                     processCurrencyAmount(createTradeEvent.getSoldCurrency(), 1);
                     processCurrencyAmount(createTradeEvent.getBoughtCurrency(), -1);
         });
+    }
+
+    private void processCurrencyAmount(Currency currency, int sign) {
+        positions.computeIfPresent(currency.type(),
+                (k,v) -> v.add(currency.amount().multiply(BigDecimal.valueOf(sign))));
     }
 }
