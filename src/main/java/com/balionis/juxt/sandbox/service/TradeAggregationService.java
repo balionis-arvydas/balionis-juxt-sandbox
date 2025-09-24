@@ -9,16 +9,17 @@ import com.balionis.juxt.sandbox.model.TradeEvent;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public final class TradeAggregationService {
 
     private final TradeCacheService tradeCacheService;
-    private final Map<CurrencyType, BigDecimal> positions;
+    private final Map<CurrencyType, BigDecimal> positions = new ConcurrentHashMap<>();
 
     public TradeAggregationService(TradeCacheService tradeCacheService, TradePositionSupplier positionSupplier) {
         this.tradeCacheService = tradeCacheService;
         // TODO: bad idea to load in the constructor, consider some kind of (lazy) init method or "PostConstructor"
-        this.positions = positionSupplier.readPositions();
+        positionSupplier.readPositions().forEach((k,v) -> positions.put(k,v));
     }
 
     public void addTrade(TradeEvent event) {
